@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paint Estimate Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="TruCo Painting Logo.svg" alt="TruCo Painting" class="logo">
+            <h1>Paint Estimate Calculator</h1>
+        </header>
+
+        <!-- Estimate Type Selection -->
+        <div id="type-selection" class="screen active">
+            <h2>Select Estimate Type</h2>
+            <div class="type-buttons">
+                <button class="type-btn" onclick="selectType('exterior')">
+                    <span class="icon">🏠</span>
+                    <span class="label">Exterior</span>
+                    <span class="desc">Siding, trim, facia, eaves</span>
+                </button>
+                <button class="type-btn" onclick="selectType('interior')">
+                    <span class="icon">🛏️</span>
+                    <span class="label">Interior</span>
+                    <span class="desc">Walls, ceilings, trim, doors</span>
+                </button>
+                <button class="type-btn" onclick="selectType('deck')">
+                    <span class="icon">🪵</span>
+                    <span class="label">Deck</span>
+                    <span class="desc">Floor, railings, stairs (stain only)</span>
+                </button>
+                <button class="type-btn" onclick="selectType('fence')">
+                    <span class="icon">🚧</span>
+                    <span class="label">Fence</span>
+                    <span class="desc">Stain only</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Exterior/Interior Options -->
+        <div id="color-change-screen" class="screen">
+            <button class="back-btn" onclick="goBack('type-selection')">&larr; Back</button>
+            <h2>Color Change?</h2>
+            <p class="subtitle">Will this job involve a color change?</p>
+            <div class="option-buttons">
+                <button class="option-btn" onclick="setColorChange(false)">
+                    <span class="label">No Color Change</span>
+                    <span class="desc">Show 1 coat and 2 coat options</span>
+                </button>
+                <button class="option-btn" onclick="setColorChange(true)">
+                    <span class="label">Yes, Color Change</span>
+                    <span class="desc">Show 2 coat options only</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Exterior Input -->
+        <div id="exterior-input" class="screen">
+            <button class="back-btn" onclick="goBack('color-change-screen')">&larr; Back</button>
+            <h2>Exterior Measurements</h2>
+
+            <div class="tabs">
+                <button class="tab active" onclick="switchSide(0)">North</button>
+                <button class="tab" onclick="switchSide(1)">East</button>
+                <button class="tab" onclick="switchSide(2)">South</button>
+                <button class="tab" onclick="switchSide(3)">West</button>
+            </div>
+
+            <div class="input-form" id="exterior-form">
+                <div class="input-group">
+                    <label>Sprayed (sq ft)</label>
+                    <input type="number" id="ext-sprayed" value="0" onchange="updateExteriorSide()">
+                </div>
+                <div class="input-group">
+                    <label>Rolled (sq ft)</label>
+                    <input type="number" id="ext-rolled" value="0" onchange="updateExteriorSide()">
+                </div>
+                <div class="input-group">
+                    <label>Trim (LF)</label>
+                    <input type="number" id="ext-trim" value="0" onchange="updateExteriorSide()">
+                </div>
+                <div class="input-group">
+                    <label>Facia (LF)</label>
+                    <input type="number" id="ext-facia" value="0" onchange="updateExteriorSide()">
+                </div>
+                <div class="input-group">
+                    <label>Eaves (sq ft)</label>
+                    <input type="number" id="ext-eaves" value="0" onchange="updateExteriorSide()">
+                </div>
+                <div class="input-group">
+                    <label>Prep Hours</label>
+                    <input type="number" id="ext-prep" value="0" step="0.5" onchange="updateExteriorSide()">
+                </div>
+                <div class="input-group">
+                    <label>Story</label>
+                    <select id="ext-story" onchange="updateExteriorSide()">
+                        <option value="1">1 Story</option>
+                        <option value="1.25">2 Story</option>
+                        <option value="1.45">3 Story</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="summary">
+                <div class="summary-item">
+                    <span>Total Hours:</span>
+                    <span id="ext-total-hours">0.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Total Gallons:</span>
+                    <span id="ext-total-gallons">0.00</span>
+                </div>
+            </div>
+
+            <button class="calculate-btn" onclick="calculateExterior()">Calculate Prices</button>
+        </div>
+
+        <!-- Interior Input -->
+        <div id="interior-input" class="screen">
+            <button class="back-btn" onclick="goBack('color-change-screen')">&larr; Back</button>
+            <h2>Interior Measurements</h2>
+
+            <div class="tabs" id="room-tabs">
+                <button class="tab active" onclick="switchRoom(0)">Room 1</button>
+                <button class="tab add-tab" onclick="addRoom()">+</button>
+            </div>
+
+            <div class="input-form" id="interior-form">
+                <div class="input-group">
+                    <label>Walls (sq ft)</label>
+                    <input type="number" id="int-walls" value="0" onchange="updateInteriorRoom()">
+                </div>
+                <div class="input-group">
+                    <label>Ceiling (sq ft)</label>
+                    <input type="number" id="int-ceiling" value="0" onchange="updateInteriorRoom()">
+                </div>
+                <div class="input-group">
+                    <label>Trim (LF)</label>
+                    <input type="number" id="int-trim" value="0" onchange="updateInteriorRoom()">
+                </div>
+                <div class="input-group">
+                    <label>Doors</label>
+                    <input type="number" id="int-doors" value="0" onchange="updateInteriorRoom()">
+                </div>
+                <div class="input-group">
+                    <label>Repair Hours</label>
+                    <input type="number" id="int-repair" value="0" step="0.5" onchange="updateInteriorRoom()">
+                </div>
+                <div class="input-group">
+                    <label>Ceiling Height</label>
+                    <select id="int-height" onchange="updateInteriorRoom()">
+                        <option value="1">8 ft</option>
+                        <option value="1.15">10 ft</option>
+                        <option value="1.30">12+ ft</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="summary">
+                <div class="summary-item">
+                    <span>Total Hours:</span>
+                    <span id="int-total-hours">0.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Total Gallons:</span>
+                    <span id="int-total-gallons">0.00</span>
+                </div>
+            </div>
+
+            <button class="calculate-btn" onclick="calculateInterior()">Calculate Prices</button>
+        </div>
+
+        <!-- Deck Input (Stain Only) -->
+        <div id="deck-input" class="screen">
+            <button class="back-btn" onclick="goBack('type-selection')">&larr; Back</button>
+            <h2>Deck Measurements (Stain)</h2>
+
+            <div class="input-form">
+                <div class="input-group">
+                    <label>Sprayed (sq ft)</label>
+                    <input type="number" id="deck-sprayed" value="0" onchange="updateDeckTotals()">
+                </div>
+                <div class="input-group">
+                    <label>Rolled (sq ft)</label>
+                    <input type="number" id="deck-rolled" value="0" onchange="updateDeckTotals()">
+                </div>
+                <div class="input-group">
+                    <label>Simple Railings (LF)</label>
+                    <input type="number" id="deck-simple-rail" value="0" onchange="updateDeckTotals()">
+                </div>
+                <div class="input-group">
+                    <label>Complex Railings (LF)</label>
+                    <input type="number" id="deck-complex-rail" value="0" onchange="updateDeckTotals()">
+                </div>
+                <div class="input-group">
+                    <label>Stairs (count)</label>
+                    <input type="number" id="deck-stairs" value="0" onchange="updateDeckTotals()">
+                </div>
+                <div class="input-group">
+                    <label>Prep Hours</label>
+                    <input type="number" id="deck-prep" value="0" step="0.5" onchange="updateDeckTotals()">
+                </div>
+            </div>
+
+            <div class="summary">
+                <div class="summary-item">
+                    <span>Total Hours:</span>
+                    <span id="deck-total-hours">0.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Total Gallons:</span>
+                    <span id="deck-total-gallons">0.00</span>
+                </div>
+            </div>
+
+            <button class="calculate-btn" onclick="calculateDeck()">Calculate Prices</button>
+        </div>
+
+        <!-- Fence Input (Stain Only) -->
+        <div id="fence-input" class="screen">
+            <button class="back-btn" onclick="goBack('type-selection')">&larr; Back</button>
+            <h2>Fence Measurements (Stain)</h2>
+
+            <div class="input-form">
+                <div class="input-group">
+                    <label>Sprayed (sq ft)</label>
+                    <input type="number" id="fence-sprayed" value="0" onchange="updateFenceTotals()">
+                </div>
+                <div class="input-group">
+                    <label>Rolled (sq ft)</label>
+                    <input type="number" id="fence-rolled" value="0" onchange="updateFenceTotals()">
+                </div>
+                <div class="input-group">
+                    <label>Sides</label>
+                    <select id="fence-sides" onchange="updateFenceTotals()">
+                        <option value="1">One Side</option>
+                        <option value="2">Both Sides</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Stain Opacity</label>
+                    <select id="fence-opacity" onchange="updateFenceTotals()">
+                        <option value="1">Clear</option>
+                        <option value="1.2">Semi-Transparent</option>
+                        <option value="1.5">Solid</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Prep Hours</label>
+                    <input type="number" id="fence-prep" value="0" step="0.5" onchange="updateFenceTotals()">
+                </div>
+            </div>
+
+            <div class="summary">
+                <div class="summary-item">
+                    <span>Total Hours:</span>
+                    <span id="fence-total-hours">0.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Total Gallons:</span>
+                    <span id="fence-total-gallons">0.00</span>
+                </div>
+            </div>
+
+            <button class="calculate-btn" onclick="calculateFence()">Calculate Prices</button>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <button class="back-btn" onclick="goBackFromResults()">&larr; Back</button>
+            <h2>Price Options</h2>
+            <p class="coat-description" id="coat-desc"></p>
+
+            <div id="price-options" class="price-options"></div>
+
+            <div class="custom-price">
+                <label>Custom Price</label>
+                <input type="number" id="custom-price" placeholder="Enter custom price">
+            </div>
+
+            <div class="results-summary">
+                <div class="summary-item">
+                    <span>Selected Price:</span>
+                    <span id="selected-price" class="price-value">$0</span>
+                </div>
+                <div class="summary-item">
+                    <span>Hours:</span>
+                    <span id="selected-hours">0.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Gallons:</span>
+                    <span id="selected-gallons">0.00</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="calculator.js"></script>
+</body>
+</html>

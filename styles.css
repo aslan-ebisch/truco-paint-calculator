@@ -1,0 +1,379 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background-color: #fff;
+    color: #000;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #333;
+    margin-bottom: 20px;
+}
+
+header .logo {
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+header h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Screens */
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+}
+
+h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Back Button */
+.back-btn {
+    background: none;
+    border: none;
+    color: #007AFF;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    padding: 5px 0;
+}
+
+.back-btn:hover {
+    opacity: 0.8;
+}
+
+/* Type Selection Buttons */
+.type-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.type-btn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #1c1c1e;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s;
+}
+
+.type-btn:hover {
+    background: #2c2c2e;
+}
+
+.type-btn .icon {
+    font-size: 28px;
+    width: 40px;
+    text-align: center;
+}
+
+.type-btn .label {
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    display: block;
+}
+
+.type-btn .desc {
+    font-size: 13px;
+    color: #888;
+    display: block;
+    margin-top: 2px;
+}
+
+/* Option Buttons */
+.option-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-btn {
+    display: block;
+    background: #1c1c1e;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s;
+}
+
+.option-btn:hover {
+    background: #2c2c2e;
+}
+
+.option-btn .label {
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    display: block;
+}
+
+.option-btn .desc {
+    font-size: 13px;
+    color: #888;
+    display: block;
+    margin-top: 4px;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.tab {
+    background: #1c1c1e;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    color: #888;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.tab.active {
+    background: #007AFF;
+    color: #fff;
+}
+
+.tab:hover:not(.active) {
+    background: #2c2c2e;
+}
+
+.tab.add-tab {
+    background: #2c2c2e;
+    font-size: 18px;
+    padding: 10px 14px;
+}
+
+/* Input Form */
+.input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #1c1c1e;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-group label {
+    font-size: 15px;
+    color: #fff;
+}
+
+.input-group input,
+.input-group select {
+    background: #2c2c2e;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #fff;
+    font-size: 15px;
+    width: 120px;
+    text-align: right;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: 2px solid #007AFF;
+}
+
+.input-group select {
+    text-align: left;
+    width: 140px;
+}
+
+/* Summary */
+.summary {
+    background: #1c1c1e;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+
+.summary-item:not(:last-child) {
+    border-bottom: 1px solid #333;
+}
+
+.summary-item span:first-child {
+    color: #888;
+}
+
+.summary-item span:last-child {
+    font-weight: 600;
+    color: #fff;
+}
+
+/* Buttons */
+.calculate-btn {
+    width: 100%;
+    background: #007AFF;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.calculate-btn:hover {
+    opacity: 0.9;
+}
+
+/* Results Screen */
+.coat-description {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.price-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.price-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1c1c1e;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.price-option:hover {
+    background: #2c2c2e;
+}
+
+.price-option.selected {
+    border-color: #007AFF;
+    background: #0a1a2e;
+}
+
+.price-option .name {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.price-option .price {
+    font-size: 18px;
+    font-weight: 700;
+    color: #30D158;
+}
+
+/* Custom Price */
+.custom-price {
+    background: #1c1c1e;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-price label {
+    font-size: 15px;
+}
+
+.custom-price input {
+    background: #2c2c2e;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #fff;
+    font-size: 15px;
+    width: 140px;
+    text-align: right;
+}
+
+.custom-price input:focus {
+    outline: 2px solid #007AFF;
+}
+
+/* Results Summary */
+.results-summary {
+    background: #1c1c1e;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.price-value {
+    color: #30D158 !important;
+    font-size: 20px !important;
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+    .container {
+        padding: 15px;
+    }
+
+    .input-group input,
+    .input-group select {
+        width: 100px;
+    }
+}
