@@ -26,8 +26,8 @@ const ProductionRates = {
         eaves: { hours: 100, gallons: 250 }
     },
     interior: {
-        walls: { hours: 300, gallons: 375 },        // sq ft/hr, sq ft/gal
-        ceiling: { hours: 300, gallons: 375 },
+        walls: { hours: 150, gallons: 375 },        // sq ft/hr, sq ft/gal
+        ceiling: { hours: 150, gallons: 375 },
         trim: { hours: 25, gallons: 325 },          // LF/hr, LF/gal
         doors: { hours: 1, sqftPerDoor: 20 }        // hr/door
     },
